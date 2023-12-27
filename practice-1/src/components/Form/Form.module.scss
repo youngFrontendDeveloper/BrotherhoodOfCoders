@@ -7,7 +7,6 @@
 
 .form__item-wrap {
   width: 100%;
-  //max-width: 362px;
 
   @media screen and (min-width: variable.$width-md) {
     max-width: 320px;
@@ -167,32 +166,15 @@
   font-weight: 300;
 }
 
+.form_input.warning::placeholder {
+  color: variable.$red-color;
+}
+
 .form_select {
   position: relative;
   z-index: 2;
   background-color: transparent;
   appearance: none;
-}
-
-.form__btn {
-  width: 100%;
-  padding: 14px 0 16px 0;
-  color: variable.$white-color;
-  text-align: center;
-  font-family: var(--secondary-text-font);
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 18px;
-  background-color: variable.$button-bg-color;
-  border: none;
-  border-radius: 5px;
-  outline: transparent;
-
-  &-reset {
-    color: variable.$btn-reset-color;
-    background-color: variable.$white-color;
-  }
 }
 
 .form_input-file {

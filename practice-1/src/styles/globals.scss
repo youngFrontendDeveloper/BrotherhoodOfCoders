@@ -48,3 +48,27 @@ ul, li {
 .main {
 }
 
+.button {
+  width: 100%;
+  padding: 14px 0 16px 0;
+  color: variable.$white-color;
+  text-align: center;
+  font-family: var(--secondary-text-font);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 18px;
+  background-color: variable.$button-bg-color;
+  border: none;
+  border-radius: 5px;
+  outline: transparent;
+  cursor: pointer;
+
+  &--reset {
+    width: 100px;
+    margin: 0 auto;
+    color: variable.$btn-reset-color;
+    background-color: variable.$white-color;
+  }
+}
+

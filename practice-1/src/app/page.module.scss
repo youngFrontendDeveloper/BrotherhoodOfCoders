@@ -1,9 +1,15 @@
 .home {
-
+  height: 90vh;
+  padding: 200px 20px;
 }
 
 .home__title {
+  margin-bottom: 70px;
+  text-align: center;
   font-family: var(--title-font);
 }
 
-.home__text {}
+.home__btn {
+  max-width: 300px;
+
+}
