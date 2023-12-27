@@ -11,7 +11,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
     <body className={ `${ ptSans.variable } ${ lato.variable } ${ montserrat.variable }` }>
-    <main className="main">
+    <main className="main container">
       { children }
     </main>
     <div id="modal-root"/>

@@ -1,41 +1,40 @@
 import styles from "./Modal.module.scss";
 import ReactDOM from "react-dom";
-import { useCallback, useEffect, useRef } from "react";
+import Form from "@/components/Form/Form";
 import Close from "@/components/Close/Close";
+import { useEffect, useRef } from "react";
 
-export default function Modal({ onClose, children, title }) {
-  const modalWrapperRef = useRef();
+export default function Modal({ onClose }) {
+  const rootRef = useRef(null);
 
-  const backDropHandler = useCallback( e => {
-    if( !modalWrapperRef?.current?.contains( e.target ) ) {
-      onClose();
-    }
-  }, [onClose] );
+  useEffect(() => {
+    const handleWrapperClick = (event) => {
+      const { target } = event;
 
-  useEffect( () => {
-    setTimeout( () => {
-      window.addEventListener( "click", backDropHandler );
-    } );
-  }, [backDropHandler] );
+      if (target instanceof Node && rootRef.current === target) {
+        onClose?.();
+      }
+    };
+    const handleEscapePress = (event) => {
+      if (event.key === 'Escape') {
+        onClose?.();
+      }
+    };
 
-  useEffect( () => {
-    return () => window.removeEventListener( "click", backDropHandler );
-  }, [backDropHandler] );
+    window.addEventListener('click', handleWrapperClick);
+    window.addEventListener('keydown', handleEscapePress);
 
-  const handleCloseClick = (e) => {
-    e.preventDefault();
-    onClose();
-  };
+    return () => {
+      window.removeEventListener('click', handleWrapperClick);
+      window.removeEventListener('keydown', handleEscapePress);
+    };
+  }, [onClose]);
+
   const modalContent = (
-    <div className={ styles[ "modal-overlay" ] }>
-      <div ref={ modalWrapperRef } className={ styles[ "modal-wrapper" ] }>
-        <div className={ styles[ "modal" ] }>
-            <div className={styles["modal__close"]}>
-              <Close onClick={ handleCloseClick }/>
-            </div>
-          {/*{title && <h1 className={styles["modal__title"]}>{ title }</h1>}*/}
-          <div className={ styles[ "modal__body" ] }>{ children }</div>
-        </div>
+    <div className={ styles[ "modal-overlay" ] } ref={rootRef}>
+      <div className={ styles[ "modal" ] }>
+        <h1 className={ styles[ "modal__title" ] }>Стать партнёром проекта</h1>
+        <Form />
       </div>
     </div>
   );
@@ -46,52 +45,3 @@ export default function Modal({ onClose, children, title }) {
   );
 }
 
-
-// "use client";
-//
-// import styles from "./Modal.module.scss";
-// import { useCallback, useEffect, useRef } from "react";
-// import { useRouter } from "next/navigation";
-//
-// export default function Modal({ children }) {
-//   const overlay = useRef( null );
-//   const wrapper = useRef( null );
-//   const router = useRouter();
-//
-//   const onDismiss = useCallback( () => {
-//     router.back();
-//   }, [ router ] );
-//
-//   const onClick = useCallback( (e) => {
-//     if( e.target === overlay.current || e.target === wrapper.current ) {
-//       if( onDismiss ) {
-//         onDismiss();
-//       }
-//     }
-//   }, [ onDismiss, overlay, wrapper ] );
-//
-//   const onKeyDown = useCallback( (e) => {
-//     if( e.key === "Escape" ) {
-//       onDismiss();
-//     }
-//   }, [ onDismiss ] );
-//
-//   useEffect( () => {
-//     document.addEventListener( "keydown", onKeyDown );
-//     return () => document.removeEventListener( "keydown", onKeyDown );
-//   }, [ onKeyDown ] );
-//
-//   return (
-//     <div
-//       className={ styles.modal }
-//       ref={ overlay }
-//       onClick={ onClick }
-//     >
-//       <div
-//         className={styles.wrapper}
-//         ref={wrapper}>
-//         { children }
-//       </div>
-//     </div>
-//   );
-// }
