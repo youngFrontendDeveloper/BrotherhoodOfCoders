@@ -1,0 +1,50 @@
+@use "../../styles/variables" as variable;
+
+.modal-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 30;
+}
+
+.modal-wrapper {
+  position: relative;
+  width: 500px;
+  height: 95%;
+
+  @media screen and (min-width: variable.$width-lg) {
+    width: 700px;
+    height: 700px;
+  }
+}
+
+.modal {
+  width: 100%;
+  height: 100%;
+  padding: 15px;
+  background: variable.$color-white;
+  border-radius: 15px;
+
+  @media screen and (min-width: variable.$width-md) {
+    padding: 50px 25px;
+  }
+}
+
+.modal__title {
+  width: 80%;
+  margin: 0 auto 10px;
+  font-size: 22px;
+  text-align: center;
+}
+
+.modal__close {
+  position: absolute;
+  top: 7px;
+  right: 7px;
+}
