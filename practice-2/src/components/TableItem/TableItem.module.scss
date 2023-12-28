@@ -1,63 +1,37 @@
 @use "../../styles/variables" as variable;
 
-.trow {
-  display: block;
-  margin-bottom: 15px;
-  border-bottom: 2px solid variable.$td-color;
+.table__col {
+  padding: 10px;
+  border: 1px solid variable.$td-color;
 
-  @media screen and (min-width: variable.$width-sm){
-    margin-bottom: 0;
-    border: none;
-    vertical-align: top;
-  }
+  @media screen and (max-width: variable.$width-sm) {
+    position: relative;
+    display: block;
+    width: 100%;
+    padding: 10px 10px 10px 80px;
+    text-align: left;
+    border-bottom:none;
 
-}
-
-.tcol {
-  position: relative;
-  display: inline-block;
-  width: 100%;
-  padding: 10px 10px 10px 80px;
-  text-align: left;
-  //border-bottom: 1px solid variable.$td-color;
-
-  &::before {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    content: attr(aria-label);
-    font-weight: bold;
-  }
-
-  @media screen and (min-width: variable.$width-sm){
-    position: static;
-    width: 25%;
-    height: 100%;
-    padding: 10px;
-    border: 1px solid variable.$td-color;
-
-    &::before{
-      content: none;
+    &::before {
+      position: absolute;
+          top: 10px;
+          left: 10px;
+          content: attr(aria-label);
+          font-weight: bold;
     }
   }
 }
 
-.tcol:nth-child(1),
-.tcol:nth-child(2){
-  width: 100%;
 
-  @media screen and (min-width: variable.$width-sm){
-    width: 10%;
+.table__row {
+
+  @media screen and (max-width: variable.$width-sm){
+    display: block;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid variable.$td-color;
   }
 }
 
-.tcol:nth-child(3),
-.tcol:nth-child(4){
-  width: 100%;
-
-  @media screen and (min-width: variable.$width-sm){
-    width: 40%;
-  }
+.table__row:nth-child(odd){
+  background-color: variable.$bg-row-color;
 }
-
-
