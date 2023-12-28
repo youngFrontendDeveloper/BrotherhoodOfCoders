@@ -31,6 +31,13 @@
     margin-bottom: 32px;
   }
 
+  &:last-of-type {
+    margin-bottom: 25px;
+
+    @media screen and (min-width: variable.$width-md) {
+      margin-bottom: 50px;
+    }
+  }
 }
 
 .form__item--relative {
@@ -84,10 +91,8 @@
 .form__item--file {
   position: relative;
   width: 175px;
-  height: max-content;
-  //height: 200px;
+  height: 200px;
   order: -1;
-  margin-bottom: 15px;
   padding: 0;
   border: none;
 
@@ -225,19 +230,6 @@
   }
 }
 
-.form__error {
-  margin-bottom: 10px;
-}
-
 .form__success {
   width: 100%;
-  margin-bottom: 20px;
-}
-
-.form__btn {
-  margin-top: 25px;
-
-  @media screen and (min-width: variable.$width-md) {
-    margin-top: 50px;
-  }
 }

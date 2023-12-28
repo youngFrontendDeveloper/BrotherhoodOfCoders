@@ -4,7 +4,6 @@ import styles from "./Form.module.scss";
 import Image from "next/image";
 import Button from "@/components/Button/Button";
 import { useEffect, useRef, useState } from "react";
-import { useForm } from "@/services/useForm";
 
 const nameRegExp = /[a-zA-zа-яА-яёЁ]$/;
 const phoneRegExp = /^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/;
@@ -12,48 +11,81 @@ const phoneRegExp = /^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/;
 const emailRegExp = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
 export default function Form() {
+  const [ name, setName ] = useState( "" );
+  const [ phone, setPhone ] = useState( "" );
+  const [ email, setEmail ] = useState( "" );
+  const [ file, setFile ] = useState( "" );
+  const [ fieldActivity, setFieldActivity ] = useState( "ecology" );
+  const [ webSite, setWebSite ] = useState( "" );
+  const [ vk, setVk ] = useState( "" );
+  const [ classmates, setClassmates ] = useState( "" );
+  const [ facebook, setFacebook ] = useState( "" );
+  const [ instagram, setInstagram ] = useState( "" );
+  const [ youtube, setYoutube ] = useState( "" );
+  const [ director, setDirector ] = useState( "" );
+  const [ errorMessage, setErrorMessage ] = useState( {
+    name: "",
+    // phone: "",
+    // email: ""
+  } );
   const nameRef = useRef();
 
-  const {handleSubmit, handleChange, onFileChange, handleOnBlur, handleOnFocus, handleReset, data, errors, valid } = useForm( {
-    validations: {
-      name: {
-        required: {
-          value: true,
-          message: "Пожалуйста, заполните это поле",
-        },
-      },
-      phone: {
-        required: {
-          value: true,
-          message: "Пожалуйста, заполните это поле",
-        },
-        pattern: {
-          value: phoneRegExp,
-          message: "Введите корректное значение",
-        },
-      },
-      email: {
-        required: {
-          value: true,
-          message: "Пожалуйста, заполните это поле",
-        },
-        pattern: {
-          value: emailRegExp,
-          message: "Введите корректное значение",
-        },
-      },
-      // fieldActivity: {
-      //
-      // },
-      file: {
-        required: {
-          value: true,
-          message: "Пожалуйста, выберите файл",
-        },
-      },
-    },
-  } );
 
+  // const [ value, setValue ] = useState( {
+  //   name: "",
+  //   phone: "",
+  //   email: "",
+  //   file: "",
+  //   fieldActivity: "ecology",
+  //   webSite: "",
+  //   vk: "",
+  //   classmates: "",
+  //   facebook: "",
+  //   instagram: "",
+  //   youtube: "",
+  //   director: "",
+  // } );
+
+  // console.log(name);
+  // console.log(phone);
+  // console.log(email);
+  // console.log(fieldActivity);
+
+  // Проверка на валидацию
+  const validateValue = (reg, value) => {
+    return reg.test( value );
+  };
+
+  //Устанавливаю фокус после первого рендеринга
+  useEffect( () => {
+    nameRef.current?.focus();
+  }, [] );
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if( ( name && validateValue( nameRegExp, name ) ) && ( phone && validateValue( phoneRegExp, phone ) ) && ( email && validateValue( emailRegExp, email ) ) && fieldActivity ) {
+      setErrorMessage({})
+      console.log( "ok" );
+      const data = {
+        name,
+        phone,
+        fieldActivity,
+        webSite,
+        vk,
+        classmates,
+        facebook,
+        instagram,
+        youtube,
+        director,
+      };
+      console.log( data );
+    } else if( !name ) {
+      // setErrorMessage( (prevState)=>{ ...prevState, name: "Пожалуйста заполните это поле" } );
+
+    }
+
+  };
 
   return (
     <form className={ styles.form } onSubmit={ handleSubmit }>
@@ -68,20 +100,15 @@ export default function Form() {
             type="text"
             className={ styles[ "form_input" ] }
             id="name"
-            name="name"
             placeholder="ООО Ромашка"
-            value={ data.name || "" }
-            onChange={ handleChange( "name" ) }
-            onBlur={ (e) => handleOnBlur( e ) }
-            onFocus={ (e) => {
-              handleOnFocus( e );
+            onChange={ (e) => {
+              setName( e.target.value );
             } }
           />
-
+          {
+            errorMessage.name && <p>{errorMessage.name}</p>
+          }
         </div>
-        {
-          errors.name && <p className={ `error ${ styles[ "form__error" ] }` }>{ errors.name }</p>
-        }
 
         <div className={ styles[ "form__item" ] }>
           <label className={ `${ styles[ "form__libel" ] } ${ styles[ "form__libel--required" ] }` } htmlFor="phone">
@@ -91,20 +118,11 @@ export default function Form() {
             type="tel"
             className={ styles[ "form_input" ] }
             id="phone"
-            name="phone"
             placeholder="+7 933 848-34-33"
-            value={ data.phone || "" }
-            onChange={ handleChange( "phone" ) }
-            onBlur={ (e) => handleOnBlur( e ) }
-            onFocus={ (e) => {
-              handleOnFocus( e );
-            } }
-          />
+            onChange={ (e) => setPhone( e.target.value ) }
 
+          />
         </div>
-        {
-          errors.phone && <p className={ `error ${ styles[ "form__error" ] }` }>{ errors.phone }</p>
-        }
 
         <div className={ styles[ "form__item" ] }>
           <label className={ `${ styles[ "form__libel" ] } ${ styles[ "form__libel--required" ] }` } htmlFor="email">
@@ -114,20 +132,10 @@ export default function Form() {
             type="email"
             className={ styles[ "form_input" ] }
             id="email"
-            name="email"
             placeholder="mail@mail.ru"
-            value={ data.email || "" }
-            onChange={ handleChange( "email" ) }
-            onBlur={ (e) => handleOnBlur( e ) }
-            onFocus={ (e) => {
-              handleOnFocus( e );
-            } }
+            onChange={ (e) => setEmail( e.target.value ) }
           />
-
         </div>
-        {
-          errors.email && <p className={ `error ${ styles[ "form__error" ] }` }>{ errors.email }</p>
-        }
       </div>
 
       <div className={ `${ styles[ "form__item--file" ] }` }>
@@ -144,38 +152,27 @@ export default function Form() {
           </div>
 
         </label>
-        {
-          errors.file && <p className={ `error ${ styles[ "form__error" ] }` }>{ errors.file }</p>
-        }
         <input
           id="file"
-          name="file"
           type="file"
           accept="image/png, image/jpeg"
           className={ styles[ "form_input-file" ] }
-
-          onChange={ onFileChange  }
+          // onChange={ (e) => setFile( e.tatget.value ) }
         />
-
       </div>
 
       <div className={ `${ styles[ "form__item" ] } ${ styles[ "form__item--relative" ] }` }>
         <label
-          className={ `${ styles[ "form__libel" ] } ${ styles[ "form__libel--required" ] }` } htmlFor="activity"
+          className={ `${ styles[ "form__libel" ] } ${ styles[ "form__libel--required" ] }` } htmlFor="field-activity"
         >
           Направление
         </label>
         <select
-          name="activity"
-          id="activity"
+          name="field-activity"
+          id="field-activity"
           className={ styles[ "form_select" ] }
-          value={ data.activity || "ecology" }
-          onChange={ handleChange( "activity" ) }
-          required
+          onChange={ (e) => setFieldActivity( e.target.value ) }
         >
-          {
-            errors.activity && <p className={ `error ${ styles[ "form__error" ] }` }>{ errors.activity }</p>
-          }
           <option value="ecology">Экология</option>
           <option value="programming">Программирование</option>
           <option value="art">Искусство</option>
@@ -187,11 +184,8 @@ export default function Form() {
           type="text"
           className={ `${ styles[ "form_input" ] } ${ styles[ "globe" ] }` }
           placeholder="avc.ru"
-          name="site"
-          value={ data.site || "" }
-          onChange={ handleChange( "site" ) }
+          onChange={ (e) => setWebSite( e.target.value ) }
         />
-
       </div>
 
       <div className={ `${ styles[ "form__item" ] } ${ styles[ "form__item--relative" ] }` }>
@@ -199,23 +193,17 @@ export default function Form() {
           type="text"
           className={ `${ styles[ "form_input" ] } ${ styles[ "vk" ] }` }
           placeholder="vk.com/shans"
-          name="vk"
-          value={ data.vk || "" }
-          onChange={ handleChange( "vk" ) }
+          onChange={ (e) => setVk( e.target.value ) }
         />
-
       </div>
-      {/******************************/ }
+
       <div className={ `${ styles[ "form__item" ] } ${ styles[ "form__item--relative" ] }` }>
         <input
           type="text"
           className={ `${ styles[ "form_input" ] } ${ styles[ "classmates" ] }` }
           placeholder="ok.com/shans"
-          name="classmates"
-          value={ data.classmates || "" }
-          onChange={ handleChange( "classmates" ) }
+          onChange={ (e) => setClassmates( e.target.value ) }
         />
-
       </div>
 
       <div className={ `${ styles[ "form__item" ] } ${ styles[ "form__item--relative" ] }` }>
@@ -223,11 +211,8 @@ export default function Form() {
           type="text"
           className={ `${ styles[ "form_input" ] } ${ styles[ "facebook" ] }` }
           placeholder="facebook.com/shans"
-          name="facebook"
-          value={ data.facebook || "" }
-          onChange={ handleChange( "facebook" ) }
+          onChange={ (e) => setFacebook( e.target.value ) }
         />
-
       </div>
 
       <div className={ `${ styles[ "form__item" ] } ${ styles[ "form__item--relative" ] }` }>
@@ -235,9 +220,7 @@ export default function Form() {
           type="text"
           className={ `${ styles[ "form_input" ] } ${ styles[ "instagram" ] }` }
           placeholder="instagram.com/shans"
-          name="instagram"
-          value={ data.instagram || "" }
-          onChange={ handleChange( "instagram" ) }
+          onChange={ (e) => setInstagram( e.target.value ) }
         />
       </div>
 
@@ -246,11 +229,8 @@ export default function Form() {
           type="text"
           className={ `${ styles[ "form_input" ] } ${ styles[ "youtube" ] }` }
           placeholder="youtube.com/shans"
-          name="youtube"
-          value={ data.youtube || "" }
-          onChange={ handleChange( "youtube" ) }
+          onChange={ (e) => setYoutube( e.target.value ) }
         />
-
       </div>
 
       <div className={ styles[ "form__item" ] }>
@@ -262,29 +242,11 @@ export default function Form() {
           className={ styles[ "form_input" ] }
           id="director"
           placeholder="Иванов Иван Иванович"
-          name="director"
-          value={ data.director || "" }
-          onChange={ handleChange( "director" ) }
+          onChange={ (e) => setDirector( e.target.value ) }
         />
-
       </div>
-      {/*<button*/}
-      {/*  type="submit"*/}
-      {/*  className={ `button ${ styles[ "form__btn" ] }` }*/}
-      {/*>*/}
-      {/*  Стать партнёром проекта*/}
-      {/*</button>*/}
-      {/*<button*/}
-      {/*  type="reset"*/}
-      {/*  className="button button--reset"*/}
-      {/*>*/}
-      {/*  Отменить*/}
-      {/*</button>*/}
-     <Button type="submit" text="Стать партнёром проекта" btnClass={ styles[ "form__btn" ] } />
-     <Button type="reset" text=" Отменить" btnClass="button--reset" func={handleReset}/>
-      {
-        valid && <p className={ `success ${ styles[ "form__success" ] }` }>Ваша заявка отправлена!</p>
-      }
+      <Button type="submit" text="Стать партнёром проекта" btnClass="" />
+      <Button type="reset" text=" Отменить" btnClass="button--reset" />
     </form>
   );
 }

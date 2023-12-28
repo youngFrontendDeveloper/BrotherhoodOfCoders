@@ -1,4 +1,5 @@
 export default function Button({ type, text, btnClass, func }) {
+
   return (
     <button
       type={ type }
