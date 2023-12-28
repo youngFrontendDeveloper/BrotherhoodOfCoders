@@ -1,0 +1,85 @@
+@use "../../styles/variables" as variable;
+
+//@media screen and (max-width: 800px) {
+  //.table thead {
+  //  display: none;
+  //}
+  .table tr {
+    //display: block;
+    //margin-bottom: 1rem;
+    //border-bottom: 2px solid #e8e9eb;
+  }
+  .table td {
+    //display: block;
+    //text-align: right;
+  }
+  //.table td:before {
+  //  position: absolute;
+  //  top: 0;
+  //  left: -6rem;
+  //  content: attr(aria-label);
+  //
+  //  font-weight: bold;
+  //}
+//}
+
+//.table {width: 100%; border: 0px; border-collapse: collapse;}
+//.table thead {font-weight: bold;}
+
+
+
+
+.table {
+  width: 100%;
+  margin-bottom: 50px;
+  border: 0;
+  border-collapse: collapse;
+
+  @media screen and (min-width: variable.$width-sm){
+    max-width: 800px;
+    margin: 0 auto;
+    border: 2px solid variable.$table-color;
+  }
+}
+
+.table__head {
+  display: none;
+  font-weight: bold;
+
+  @media screen and (min-width: variable.$width-sm){
+    display: inline-block;
+    width: 100%;
+  }
+}
+
+.table__thcol {
+  display: inline-block;
+  padding: 10px;
+  border: 1px solid #000;
+}
+
+.table__thcol:nth-child(1),
+.table__thcol:nth-child(2){
+  width: 100%;
+
+  @media screen and (min-width: variable.$width-sm){
+    width: 10%;
+  }
+
+}
+
+.table__thcol:nth-child(3),
+.table__thcol:nth-child(4){
+  width: 100%;
+
+  @media screen and (min-width: variable.$width-sm){
+    width: 40%;
+  }
+}
+
+
+
+.table__hrow {
+  display: block;
+  width: 100%;
+}
