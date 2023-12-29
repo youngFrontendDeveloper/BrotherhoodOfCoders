@@ -61,7 +61,7 @@ export default function Form({ onClose }) {
         onClose?.();
       }, 2000 );
 
-      clearTimeout( timer );
+      return () => clearTimeout(timer);
     }
   }, [ valid ] );
 
