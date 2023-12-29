@@ -1,4 +1,4 @@
-import { PT_Sans, Montserrat, Lato } from "next/font/google";
+import { PT_Sans, Montserrat, } from "next/font/google";
 import localFont from 'next/font/local';
 
 export const ptSans = PT_Sans( {

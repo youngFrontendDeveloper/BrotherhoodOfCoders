@@ -13,7 +13,6 @@
   padding: 15px;
   background-color: variable.$white-color;
   border: 1px solid variable.$border-color;
-  //border-radius: 10px;
 }
 
 .form__title {
@@ -35,7 +34,6 @@
   padding: 7px;
   font-size: 18px;
   border: 1px solid variable.$border-color;
-  //border-radius: 5px;
   outline-color: variable.$border-color;
 
   &::placeholder {
@@ -57,10 +55,9 @@
   font-size: 18px;
   border: 1px solid #000;
   background-color: variable.$button-bg-color;
-  //border-radius: 5px;
 
   &:hover {
-    box-shadow: 0px 0px 5px 0px variable.$shadow-color;
+    box-shadow: 0 0 5px 0 variable.$shadow-color;
     cursor: pointer;
   }
 }
