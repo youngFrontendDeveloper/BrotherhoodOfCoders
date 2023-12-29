@@ -1,0 +1,45 @@
+@use "../../styles/variables" as variable;
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto 30px;
+  padding: 15px;
+  //border: 1px solid variable.$table-color;
+}
+
+.form__title{
+  width: 200px;
+  margin-bottom: 5px;
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+
+  @media screen and (min-width: variable.$width-md){
+    width: 300px;
+  }
+}
+
+.form__input {
+  width: 100%;
+  padding: 7px;
+
+  &::placeholder {
+    color: variable.$placeholder-color;
+    font-size: 16px;
+  }
+}
+
+.form__warning {
+  margin-top: -7px;
+  margin-bottom: 10px;
+}
+
+.form__btn {
+  width: 100%;
+  max-width: 300px;
+  cursor: pointer;
+}
