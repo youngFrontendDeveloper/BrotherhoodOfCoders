@@ -1,20 +1,24 @@
 "use client";
 
 import styles from "./Form.module.scss";
+
+import { useEffect, useRef } from "react";
 import Image from "next/image";
+
 import Button from "@/components/Button/Button";
-import { useEffect, useRef, useState } from "react";
 import { useForm } from "@/services/useForm";
 
-const nameRegExp = /[a-zA-zа-яА-яёЁ]$/;
 const phoneRegExp = /^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/;
-// const phoneRegExp = /^\+?[78]?[-(\s]?\d{3}[-)\s]?\d{3}[-\s]?\d{2}[-\s]?\d{2}$/;
 const emailRegExp = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-export default function Form() {
+export default function Form({ onClose }) {
   const nameRef = useRef();
 
-  const {handleSubmit, handleChange, onFileChange, handleOnBlur, handleOnFocus, handleReset, data, errors, valid } = useForm( {
+  const {
+    handleSubmit, handleChange,
+    onFileChange,
+    handleOnBlur, handleOnFocus, handleReset, data, errors, valid
+  } = useForm( {
     validations: {
       name: {
         required: {
@@ -42,9 +46,6 @@ export default function Form() {
           message: "Введите корректное значение",
         },
       },
-      // fieldActivity: {
-      //
-      // },
       file: {
         required: {
           value: true,
@@ -54,6 +55,15 @@ export default function Form() {
     },
   } );
 
+  useEffect( () => {
+    if( valid ) {
+      const timer = setTimeout( () => {
+        onClose?.();
+      }, 2000 );
+
+      clearTimeout( timer );
+    }
+  }, [ valid ] );
 
   return (
     <form className={ styles.form } onSubmit={ handleSubmit }>
@@ -77,7 +87,6 @@ export default function Form() {
               handleOnFocus( e );
             } }
           />
-
         </div>
         {
           errors.name && <p className={ `error ${ styles[ "form__error" ] }` }>{ errors.name }</p>
@@ -123,7 +132,6 @@ export default function Form() {
               handleOnFocus( e );
             } }
           />
-
         </div>
         {
           errors.email && <p className={ `error ${ styles[ "form__error" ] }` }>{ errors.email }</p>
@@ -135,17 +143,22 @@ export default function Form() {
           className={ `${ styles[ "form__libel" ] } ${ styles[ "form__libel-file" ] } ${ styles[ "form__libel--required" ] }  ` }
           htmlFor="file"
         >Логотип (jpeg, png)
-
           <div className={ styles[ "form__avatar-wrap" ] }>
-            <Image src="/images/avatar.jpg" className={ styles[ "form__avatar-img" ] } fill alt="Аватар пользователя" />
+            <Image
+              src="/images/avatar.jpg"
+              className={ styles[ "form__avatar-img" ] }
+              fill
+              sizes="163px"
+              alt="Аватар пользователя"
+            />
             <div className={ styles[ "form__avatar-shading" ] }><p
               className={ styles[ "form__avatar-text" ] }
             >Выберите<br /> файл</p></div>
           </div>
-
         </label>
         {
-          errors.file && <p className={ `error ${ styles[ "form__error" ] }` }>{ errors.file }</p>
+          errors.file &&
+          <p className={ `error ${ styles[ "form__error" ] } ${ styles[ "form__error--margin" ] }` }>{ errors.file }</p>
         }
         <input
           id="file"
@@ -153,10 +166,8 @@ export default function Form() {
           type="file"
           accept="image/png, image/jpeg"
           className={ styles[ "form_input-file" ] }
-
-          onChange={ onFileChange  }
+          onChange={ onFileChange }
         />
-
       </div>
 
       <div className={ `${ styles[ "form__item" ] } ${ styles[ "form__item--relative" ] }` }>
@@ -191,7 +202,6 @@ export default function Form() {
           value={ data.site || "" }
           onChange={ handleChange( "site" ) }
         />
-
       </div>
 
       <div className={ `${ styles[ "form__item" ] } ${ styles[ "form__item--relative" ] }` }>
@@ -203,9 +213,8 @@ export default function Form() {
           value={ data.vk || "" }
           onChange={ handleChange( "vk" ) }
         />
-
       </div>
-      {/******************************/ }
+
       <div className={ `${ styles[ "form__item" ] } ${ styles[ "form__item--relative" ] }` }>
         <input
           type="text"
@@ -215,7 +224,6 @@ export default function Form() {
           value={ data.classmates || "" }
           onChange={ handleChange( "classmates" ) }
         />
-
       </div>
 
       <div className={ `${ styles[ "form__item" ] } ${ styles[ "form__item--relative" ] }` }>
@@ -227,7 +235,6 @@ export default function Form() {
           value={ data.facebook || "" }
           onChange={ handleChange( "facebook" ) }
         />
-
       </div>
 
       <div className={ `${ styles[ "form__item" ] } ${ styles[ "form__item--relative" ] }` }>
@@ -250,7 +257,6 @@ export default function Form() {
           value={ data.youtube || "" }
           onChange={ handleChange( "youtube" ) }
         />
-
       </div>
 
       <div className={ styles[ "form__item" ] }>
@@ -266,22 +272,10 @@ export default function Form() {
           value={ data.director || "" }
           onChange={ handleChange( "director" ) }
         />
-
       </div>
-      {/*<button*/}
-      {/*  type="submit"*/}
-      {/*  className={ `button ${ styles[ "form__btn" ] }` }*/}
-      {/*>*/}
-      {/*  Стать партнёром проекта*/}
-      {/*</button>*/}
-      {/*<button*/}
-      {/*  type="reset"*/}
-      {/*  className="button button--reset"*/}
-      {/*>*/}
-      {/*  Отменить*/}
-      {/*</button>*/}
-     <Button type="submit" text="Стать партнёром проекта" btnClass={ styles[ "form__btn" ] } />
-     <Button type="reset" text=" Отменить" btnClass="button--reset" func={handleReset}/>
+
+      <Button type="submit" text="Стать партнёром проекта" btnClass={ styles[ "form__btn" ] } />
+      <Button type="reset" text=" Отменить" btnClass="button--reset" func={ handleReset } />
       {
         valid && <p className={ `success ${ styles[ "form__success" ] }` }>Ваша заявка отправлена!</p>
       }

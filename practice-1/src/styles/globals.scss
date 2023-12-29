@@ -18,7 +18,7 @@ body {
 }
 
 body {
-  display: flex; // Прижимаем футер к низу страницы
+  display: flex;
   flex-direction: column;
   height: 100%;
   max-width: 100vw;
@@ -43,9 +43,6 @@ ul, li {
   width: 95%;
   max-width: variable.$width-xl;
   margin: 0 auto;
-}
-
-.main {
 }
 
 .button {

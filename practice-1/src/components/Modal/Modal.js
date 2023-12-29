@@ -1,8 +1,10 @@
 import styles from "./Modal.module.scss";
-import ReactDOM from "react-dom";
-import Form from "@/components/Form/Form";
-import Close from "@/components/Close/Close";
+
 import { useEffect, useRef } from "react";
+import ReactDOM from "react-dom";
+
+import Form from "@/components/Form/Form";
+
 
 export default function Modal({ onClose }) {
   const rootRef = useRef(null);
@@ -15,6 +17,7 @@ export default function Modal({ onClose }) {
         onClose?.();
       }
     };
+
     const handleEscapePress = (event) => {
       if (event.key === 'Escape') {
         onClose?.();
@@ -34,7 +37,7 @@ export default function Modal({ onClose }) {
     <div className={ styles[ "modal-overlay" ] } ref={rootRef}>
       <div className={ styles[ "modal" ] }>
         <h1 className={ styles[ "modal__title" ] }>Стать партнёром проекта</h1>
-        <Form />
+        <Form onClose={onClose}/>
       </div>
     </div>
   );
