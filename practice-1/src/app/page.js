@@ -18,7 +18,7 @@ export default function Home() {
 
   return (
     <section className={ styles.home }>
-      <h1 className={ styles[ "home__title" ] }>Тестовое задание</h1>
+      <h1 className={ styles[ "home__title" ] }>Практическое задание №1</h1>
       <Button text="Стать участником проекта" btnClass={styles[ "home__btn" ]} func={handleToggleModal}/>
       {
         isOpen && <Modal onClose={ handleClose } />

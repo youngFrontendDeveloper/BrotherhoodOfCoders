@@ -4,7 +4,7 @@ import { ptSans, montserrat, lato } from "@/fonts/fonts";
 
 export const metadata = {
   title: "Тестовое задание",
-  description: "Тестовое задание на позицию Junior Frontend Developer",
+  description: "Тестовое задание на позицию Junior Frontend Developer. Практическое задание №1",
 };
 
 export default function RootLayout({ children }) {
