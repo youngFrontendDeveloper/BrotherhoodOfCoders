@@ -1,6 +1,7 @@
 import "../styles/globals.scss";
+
 import { ptSans, montserrat, lato } from "@/fonts/fonts";
-// import styles from "@/app/page.module.scss";
+
 
 export const metadata = {
   title: "Тестовое задание",
@@ -14,7 +15,6 @@ export default function RootLayout({ children }) {
     <main className="main container">
       { children }
     </main>
-    <div id="modal-root"/>
     </body>
     </html>
   );

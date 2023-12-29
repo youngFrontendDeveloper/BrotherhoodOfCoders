@@ -32,6 +32,6 @@
   }
 }
 
-.table__row:nth-child(odd){
+.table__row:nth-child(even){
   background-color: variable.$bg-row-color;
 }

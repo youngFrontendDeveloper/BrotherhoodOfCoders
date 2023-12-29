@@ -2,6 +2,9 @@
 
 .table {
   width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  background-color: variable.$white-color;
   border: none;
   border-collapse: collapse;
 
@@ -10,24 +13,11 @@
   }
 }
 
-.table__title{
+.table__title {
   margin-bottom: 20px;
   font-size: 22px;
   font-weight: bold;
 }
-//
-//.table__head {
-//  font-weight: bold;
-//
-//  @media screen and (max-width: variable.$width-sm) {
-//    display: none;
-//  }
-//}
-//
-//.table__thcol {
-//  padding: 10px;
-//  border: 1px solid variable.$table-color;
-//  cursor: pointer;
-//}
+
 
 

@@ -1,4 +1,5 @@
-@use "../../../styles/variables" as variable;
+@use '../../../styles/variables' as variable;
+
 .table__head {
   font-weight: bold;
 
@@ -8,7 +9,8 @@
 }
 
 .table__thcol {
+  min-width: 80px;
   padding: 10px;
-  border: 1px solid variable.$table-color;
-  cursor: pointer;
+  background-color: variable.$button-bg-color;
+  border: 1px solid variable.$border-color;
 }
