@@ -11,6 +11,7 @@
 .table__thcol {
   min-width: 80px;
   padding: 10px;
-  border: 1px solid variable.$table-color;
+  background-color: variable.$button-bg-color;
+  border: 1px solid variable.$border-color;
   cursor: pointer;
 }

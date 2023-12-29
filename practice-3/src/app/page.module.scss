@@ -1,10 +1,14 @@
+@use "../styles/variables" as variable;
+
 .home {
   height: 90vh;
   padding: 30px 20px;
 }
 
 .home__title {
-  margin-bottom: 70px;
+  width: 90%;
+  margin: 0 auto 70px;
+  color: variable.$title-color;
   text-align: center;
   font-family: var(--title-font);
 }

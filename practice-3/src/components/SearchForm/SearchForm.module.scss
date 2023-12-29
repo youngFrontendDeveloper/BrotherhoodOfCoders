@@ -1,24 +1,31 @@
 @use "../../styles/variables" as variable;
 
 .form {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
   width: 100%;
   max-width: 600px;
   margin: 0 auto 30px;
-  padding: 15px;
-  //border: 1px solid variable.$table-color;
 }
 
-.form__title{
+.form__fieldset {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 15px;
+  background-color: variable.$white-color;
+  border: 1px solid variable.$border-color;
+  //border-radius: 10px;
+}
+
+.form__title {
   width: 200px;
   margin-bottom: 5px;
+  color: variable.$label-color;
   text-align: center;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: bold;
+  font-style: italic;
 
-  @media screen and (min-width: variable.$width-md){
+  @media screen and (min-width: variable.$width-md) {
     width: 300px;
   }
 }
@@ -26,9 +33,14 @@
 .form__input {
   width: 100%;
   padding: 7px;
+  font-size: 18px;
+  border: 1px solid variable.$border-color;
+  //border-radius: 5px;
+  outline-color: variable.$border-color;
 
   &::placeholder {
     color: variable.$placeholder-color;
+    font-family: var(--secondary-text-font);
     font-size: 16px;
   }
 }
@@ -41,5 +53,14 @@
 .form__btn {
   width: 100%;
   max-width: 300px;
-  cursor: pointer;
+  padding: 7px;
+  font-size: 18px;
+  border: 1px solid #000;
+  background-color: variable.$button-bg-color;
+  //border-radius: 5px;
+
+  &:hover {
+    box-shadow: 0px 0px 5px 0px variable.$shadow-color;
+    cursor: pointer;
+  }
 }

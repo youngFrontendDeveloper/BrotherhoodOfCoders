@@ -2,6 +2,9 @@
 
 .table {
   width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  background-color: variable.$white-color;
   border: none;
   border-collapse: collapse;
 
@@ -10,7 +13,7 @@
   }
 }
 
-.table__title{
+.table__title {
   margin-bottom: 20px;
   font-size: 22px;
   font-weight: bold;

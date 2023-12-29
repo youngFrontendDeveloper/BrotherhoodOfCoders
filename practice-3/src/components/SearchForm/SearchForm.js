@@ -46,9 +46,9 @@ export default function SearchForm({ getFoundWords }) {
 
   return ( <>
     <form action="" className={ styles[ "form" ] } onSubmit={ handleSearch }>
-     <fieldset>
+     <fieldset className={ styles[ "form__fieldset" ] }>
        <legend className={ styles[ "form__title" ] }>Поиск по id,user id, title и body</legend>
-       <label htmlFor="search">Введите искомое слово</label>
+       <label htmlFor="search">Введите искомое слово:</label>
        <input
          type="search"
          className={ styles[ "form__input" ] }
