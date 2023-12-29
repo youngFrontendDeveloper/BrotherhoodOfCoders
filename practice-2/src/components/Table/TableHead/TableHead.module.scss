@@ -1,0 +1,14 @@
+@use "../../../styles/variables" as variable;
+.table__head {
+  font-weight: bold;
+
+  @media screen and (max-width: variable.$width-sm) {
+    display: none;
+  }
+}
+
+.table__thcol {
+  padding: 10px;
+  border: 1px solid variable.$table-color;
+  cursor: pointer;
+}

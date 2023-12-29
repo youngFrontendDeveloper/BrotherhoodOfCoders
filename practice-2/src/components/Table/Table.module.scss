@@ -15,19 +15,19 @@
   font-size: 22px;
   font-weight: bold;
 }
-
-.table__head {
-  font-weight: bold;
-
-  @media screen and (max-width: variable.$width-sm) {
-    display: none;
-  }
-}
-
-.table__thcol {
-  padding: 10px;
-  border: 1px solid variable.$table-color;
-  cursor: pointer;
-}
+//
+//.table__head {
+//  font-weight: bold;
+//
+//  @media screen and (max-width: variable.$width-sm) {
+//    display: none;
+//  }
+//}
+//
+//.table__thcol {
+//  padding: 10px;
+//  border: 1px solid variable.$table-color;
+//  cursor: pointer;
+//}
 
 

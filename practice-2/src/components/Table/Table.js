@@ -2,16 +2,14 @@
 
 import styles from "./Table.module.scss";
 
-import TableItem from "@/components/TableItem/TableItem";
+import TableItem from "@/components/Table/TableItem/TableItem";
 import { useState } from "react";
 import TableHead from "@/components/Table/TableHead/TableHead";
 
 export default function Table({ data }) {
 
-  const [ arr, setArr ] = useState( data );
-  console.log( arr );
-
-
+  const [ arr, setArr ] = useState( data || [] );
+  // console.log( arr );
 
   const handleSorting = (sortField, sortOrder) => {
     if( sortField ) {
@@ -59,8 +57,10 @@ export default function Table({ data }) {
     } ) ) );
     setArr( newData );
   };
+
+
   const columns = [
-    { label: "User Id", accessor: "userId", sortable: false },
+    { label: "User Id", accessor: "userId", sortable: true },
     { label: "Id", accessor: "id", sortable: true },
     { label: "Title", accessor: "title", sortable: true },
     { label: "Body", accessor: "body", sortable: true },
@@ -71,7 +71,7 @@ export default function Table({ data }) {
     <>
       <table className={ styles[ "table" ] }>
         <caption className={ styles[ "table__title" ] }>Posts</caption>
-        <TableHead columns={ columns } handleSorting={handleSorting }/>
+        <TableHead columns={ columns } handleSorting={ handleSorting } />
         {/*<thead className={ styles[ "table__head" ] }>*/ }
         {/*<tr className={ styles[ "table__hrow" ] }>*/ }
         {/*  <th*/ }
@@ -96,9 +96,12 @@ export default function Table({ data }) {
         {/*  </th>*/ }
         {/*</tr>*/ }
         {/*</thead>*/ }
+        <tbody>
         {
-          arr.map( item => <TableItem item={ item } /> )
+          arr?.map( item => <TableItem item={ item } key={ item.id } /> )
         }
+        </tbody>
+
       </table>
     </>
 
